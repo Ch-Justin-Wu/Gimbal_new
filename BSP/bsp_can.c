@@ -101,7 +101,7 @@ uint8_t can_send_data(CAN_HandleTypeDef *hcan, uint16_t id, uint8_t *data, uint8
 void TIM_CAN_PeriodElapsedCallback()
 {
     //static uint8_t tx_cnt = 0;
-
+    can_send_data(&hcan1,0x141,can1_0x141_tx_data,8);
     // µ×ÅÌ¿ØÖÆ+yaw(maybe)
     can_send_data(&hcan2, 0x101, can2_0x101_tx_data, 8);
 

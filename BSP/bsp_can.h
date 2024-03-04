@@ -38,6 +38,8 @@ extern struct_can_manange_object can2_manage_object;
 
 extern uint8_t can1_0x200_tx_data[8];
 extern uint8_t can1_0x1ff_tx_data[8];
+extern uint8_t can1_0x141_tx_data[8];
+
 extern uint8_t can2_0x101_tx_data[8];
 
 void can_filter_init(void);
