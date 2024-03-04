@@ -100,6 +100,8 @@ void struct_c620_get_offset(struct_c620 *this)
 
     math_endian_reverse_16((void *)&tmp_buffer->angle_reverse, (void *)&tmp_angle);
 
+    this->data.last_angle = tmp_angle;
+    this->data.angle = tmp_angle;
     this->data.offset_angle = tmp_angle;
 }
 

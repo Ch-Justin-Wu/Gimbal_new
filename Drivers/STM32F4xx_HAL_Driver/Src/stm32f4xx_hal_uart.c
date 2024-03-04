@@ -714,7 +714,7 @@ __weak void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* NOTE: This function should not be modified, when the callback is needed,
            the HAL_UART_MspInit could be implemented in the user file
    */
-}
+    }
 
 /**
   * @brief  UART MSP DeInit.

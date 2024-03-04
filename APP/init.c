@@ -8,7 +8,7 @@ void init_all(void)
     delay_init();
     remote_control_init();
     struct_chassis_param_init(&omni_chassis);
-    struct_pitch_init(&struct_pitch);
+    //struct_pitch_init(&struct_pitch);
     omni_chassis.init(&omni_chassis);
     can_filter_init();
 

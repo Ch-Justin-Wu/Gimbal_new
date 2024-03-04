@@ -2,15 +2,42 @@
 
 struct_chassis omni_chassis;
 
+static uint8_t *allocate_tx_data(CAN_HandleTypeDef *__hcan, enum_can_id __can_id)
+{
+    uint8_t *tmp_tx_data_ptr = NULL;
+    if (__hcan->Instance == CAN1)
+    {
+        switch (__can_id)
+        {
+
+        default:
+            break;
+        }
+    }
+    else if (__hcan->Instance == CAN2)
+    {
+        switch (__can_id)
+        {
+        case CAN_CHASSIS_ID_0x101:
+            tmp_tx_data_ptr = &can2_0x101_tx_data[0];
+            break;
+        default:
+            break;
+        }
+    }
+    return tmp_tx_data_ptr;
+}
+
 // 初始化底盘结构体
 void struct_chassis_init(struct_chassis *this)
 {
-    this->chassis_move_mode = FOLLOW_GIMBAL;
+    this->chassis_move_mode = NO_FOLLOW_GIMBAL;
     // 设置初始速度为0
     this->vx_set = 0;
     this->vy_set = 0;
     this->wz_set = 0;
-
+    // can发送
+    this->can_tx_data = allocate_tx_data(&hcan2, CAN_CHASSIS_ID_0x101);
     // 初始化电机速度为0
     for (uint8_t i = 0; i < motor_num; i++)
     {
@@ -22,8 +49,6 @@ void struct_chassis_init(struct_chassis *this)
     {
         this->lpf_1_order_rc[i].init(&(this->lpf_1_order_rc[i]), LPF_2_HZ_CUT);
     }
-
-    this->can_tx_data = can2_0x101_tx_data;
 }
 
 // 设置底盘的速度
@@ -80,6 +105,8 @@ void struct_chassis_TIM_Calculate_PeriodElapsedCallback(struct_chassis *this)
     struct_chassis_set_vx_vy_wz_rc(this);
     // 对速度进行一阶低通滤波
     struct_chassis_speed_lpf(this);
+    // 输出速度
+    chassis_speed_output(this);
 }
 
 // 初始化底盘参数

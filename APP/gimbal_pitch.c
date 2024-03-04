@@ -1,7 +1,7 @@
 #include "gimbal_pitch.h"
 #include "remote_control.h"
 
-struct_c620 struct_pitch;
+//struct_c620 struct_pitch;
 
 void struct_pitch_init(struct_c620 *this)
 {

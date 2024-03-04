@@ -441,19 +441,9 @@
               <FilePath>..\APP\callback.c</FilePath>
             </File>
             <File>
-              <FileName>can_tx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\can_tx.c</FilePath>
-            </File>
-            <File>
               <FileName>chassis_move.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\chassis_move.c</FilePath>
-            </File>
-            <File>
-              <FileName>chassis_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\chassis_task.c</FilePath>
             </File>
             <File>
               <FileName>gimbal_pitch.c</FileName>
@@ -485,10 +475,22 @@
               <FileType>1</FileType>
               <FilePath>..\APP\remote_control.c</FilePath>
             </File>
+            <File>
+              <FileName>lk_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\lk_motor.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Task</GroupName>
+          <Files>
+            <File>
+              <FileName>chassis_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Task\chassis_task.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Algorithm</GroupName>

@@ -9,6 +9,9 @@ struct_can_manange_object can2_manage_object = {0};
 
 uint8_t can1_0x200_tx_data[8] = {0};
 uint8_t can1_0x1ff_tx_data[8] = {0};
+//领控电机
+uint8_t can1_0x141_tx_data[8] = {0};
+
 uint8_t can2_0x101_tx_data[8] = {0};
 
 void can_filter_init(void)
@@ -38,20 +41,20 @@ void can_filter_init(void)
         Error_Handler();
     }
 
-    // can_filter_st.SlaveStartFilterBank = 14;
-    // can_filter_st.FilterBank = 14;
-    // if (HAL_CAN_ConfigFilter(&hcan2, &can_filter_st)!= HAL_OK)
-    // {
-    //     Error_Handler();
-    // }
-    // if (HAL_CAN_Start(&hcan2) != HAL_OK)
-    // {
-    //     Error_Handler();
-    // }
-    // if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
-    // {
-    //     Error_Handler();
-    // }
+    can_filter_st.SlaveStartFilterBank = 14;
+    can_filter_st.FilterBank = 14;
+    if (HAL_CAN_ConfigFilter(&hcan2, &can_filter_st)!= HAL_OK)
+    {
+        Error_Handler();
+    }
+    if (HAL_CAN_Start(&hcan2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+    {
+        Error_Handler();
+    }
 }
 
 void can_init(CAN_HandleTypeDef *hcan, can_rx_callback callback_function)
@@ -97,16 +100,12 @@ uint8_t can_send_data(CAN_HandleTypeDef *hcan, uint16_t id, uint8_t *data, uint8
 
 void TIM_CAN_PeriodElapsedCallback()
 {
-    static uint8_t tx_cnt = 0;
-    tx_cnt++;
-    if (tx_cnt == 2)
-    {
-        tx_cnt = 0;
-        //底盘控制+yaw(maybe)
-        can_send_data(&hcan2, 0x101, can2_0x101_tx_data, 8);
-    }
-    
-    can_send_data(&hcan1,0x1ff,can1_0x1ff_tx_data,8);
+    //static uint8_t tx_cnt = 0;
+
+    // 底盘控制+yaw(maybe)
+    can_send_data(&hcan2, 0x101, can2_0x101_tx_data, 8);
+
+    //can_send_data(&hcan1, 0x1ff, can1_0x1ff_tx_data, 8);
 }
 
 /**
